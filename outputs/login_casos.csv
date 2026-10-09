@@ -1,0 +1,121 @@
+﻿id,modulo,titulo,precondiciones,pasos,datos_prueba,resultado_esperado,tipo,prioridad
+CP-001,Autenticación,Inicio de sesión exitoso con credenciales válidas,"Usuario registrado con correo: usuario@test.com, contraseña: Test1234, cuenta activa y desbloqueada","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Test1234",El sistema autentica al usuario y redirige al menú principal,Funcional,Alta
+CP-002,Autenticación,Validación de formato de correo inválido sin arroba,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuariotest.com
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuariotest.com
+Contraseña: Test1234",El sistema muestra mensaje de error indicando formato de correo inválido y no permite el inicio de sesión,Negativo,Alta
+CP-003,Autenticación,Validación de formato de correo inválido sin dominio,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@
+Contraseña: Test1234",El sistema muestra mensaje de error indicando formato de correo inválido y no permite el inicio de sesión,Negativo,Alta
+CP-004,Autenticación,Rechazo de contraseña con menos de 8 caracteres,"Usuario registrado con correo: usuario@test.com, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña: Test12
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Test12 (7 caracteres)",El sistema muestra mensaje de error indicando que la contraseña no cumple con los requisitos mínimos,Negativo,Alta
+CP-005,Autenticación,Validación de contraseña con exactamente 8 caracteres válidos,"Usuario registrado con correo: usuario@test.com, contraseña: Test1234, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Test1234 (8 caracteres)",El sistema autentica al usuario y redirige al menú principal,Frontera,Media
+CP-006,Autenticación,Rechazo de contraseña sin mayúsculas,"Usuario registrado con correo: usuario@test.com, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña: test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: test1234 (sin mayúscula)",El sistema muestra mensaje de error indicando que la contraseña no cumple con los requisitos (falta mayúscula),Negativo,Alta
+CP-007,Autenticación,Rechazo de contraseña sin números,"Usuario registrado con correo: usuario@test.com, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña: Testabcd
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Testabcd (sin número)",El sistema muestra mensaje de error indicando que la contraseña no cumple con los requisitos (falta número),Negativo,Alta
+CP-008,Autenticación,Primer intento fallido de inicio de sesión con contraseña incorrecta,"Usuario registrado con correo: usuario@test.com, contraseña correcta: Test1234, cuenta activa y sin intentos previos","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña incorrecta: Wrong123
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Wrong123","El sistema muestra mensaje de credenciales incorrectas, no bloquea la cuenta y permite reintentar",Funcional,Alta
+CP-009,Autenticación,Segundo intento fallido consecutivo de inicio de sesión,"Usuario registrado con correo: usuario@test.com, cuenta activa, ya realizó 1 intento fallido","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña incorrecta: Wrong456
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Wrong456","El sistema muestra mensaje de credenciales incorrectas, no bloquea la cuenta y permite reintentar",Funcional,Alta
+CP-010,Autenticación,Bloqueo de cuenta tras 3 intentos fallidos consecutivos,"Usuario registrado con correo: usuario@test.com, cuenta activa, ya realizó 2 intentos fallidos consecutivos","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña incorrecta: Wrong789
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Wrong789",El sistema muestra mensaje indicando que la cuenta ha sido bloqueada por 15 minutos debido a múltiples intentos fallidos,Funcional,Alta
+CP-011,Autenticación,Intento de inicio de sesión con cuenta bloqueada,"Usuario registrado con correo: usuario@test.com, contraseña: Test1234, cuenta bloqueada por 15 minutos (dentro del período de bloqueo)","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña correcta: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Test1234",El sistema muestra mensaje indicando que la cuenta está bloqueada temporalmente y el tiempo restante de bloqueo,Funcional,Alta
+CP-012,Autenticación,Inicio de sesión exitoso después de cumplirse el período de bloqueo,"Usuario registrado con correo: usuario@test.com, contraseña: Test1234, cuenta previamente bloqueada pero han transcurrido más de 15 minutos","1. Esperar que transcurran 15 minutos desde el bloqueo
+2. Acceder a la página de inicio de sesión
+3. Ingresar correo: usuario@test.com
+4. Ingresar contraseña correcta: Test1234
+5. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: Test1234
+Tiempo transcurrido: 15 minutos 1 segundo","El sistema desbloquea automáticamente la cuenta, autentica al usuario y redirige al menú principal",Frontera,Alta
+CP-013,Autenticación,Intento de inicio de sesión con usuario inactivo,"Usuario registrado con correo: inactivo@test.com, contraseña: Test1234, cuenta marcada como inactiva/deshabilitada","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: inactivo@test.com
+3. Ingresar contraseña correcta: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: inactivo@test.com
+Contraseña: Test1234",El sistema muestra mensaje 'Usuario deshabilitado' y no permite el acceso,Funcional,Alta
+CP-014,Autenticación,Intento de inicio de sesión con correo no registrado,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Ingresar correo no registrado: noexiste@test.com
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: noexiste@test.com
+Contraseña: Test1234",El sistema muestra mensaje de credenciales incorrectas sin revelar que el usuario no existe,Seguridad,Alta
+CP-015,Autenticación,Validación de campos vacíos en correo y contraseña,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Dejar campo correo vacío
+3. Dejar campo contraseña vacío
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: (vacío)
+Contraseña: (vacío)",El sistema muestra mensajes de error indicando que los campos correo y contraseña son obligatorios,Negativo,Media
+CP-016,Autenticación,Validación de campo correo vacío,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Dejar campo correo vacío
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: (vacío)
+Contraseña: Test1234",El sistema muestra mensaje de error indicando que el campo correo es obligatorio,Negativo,Media
+CP-017,Autenticación,Validación de campo contraseña vacío,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Dejar campo contraseña vacío
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: (vacío)",El sistema muestra mensaje de error indicando que el campo contraseña es obligatorio,Negativo,Media
+CP-018,Autenticación,Validación de contraseña con espacios al inicio y final,"Usuario registrado con correo: usuario@test.com, contraseña: Test1234, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña con espacios:  Test1234  
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: ' Test1234 ' (con espacios)",El sistema muestra mensaje de credenciales incorrectas o elimina espacios y autentica correctamente,Frontera,Media
+CP-019,Autenticación,Validación de correo con mayúsculas y minúsculas,"Usuario registrado con correo: usuario@test.com (minúsculas), contraseña: Test1234, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo con mayúsculas: USUARIO@TEST.COM
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: USUARIO@TEST.COM
+Contraseña: Test1234","El sistema trata el correo sin distinguir mayúsculas/minúsculas, autentica al usuario y redirige al menú principal",Frontera,Media
+CP-020,Autenticación,Intento de inyección SQL en campo correo,Acceso a la página de inicio de sesión,"1. Acceder a la página de inicio de sesión
+2. Ingresar en correo: admin'--
+3. Ingresar contraseña: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: admin'--
+Contraseña: Test1234",El sistema rechaza la entrada mostrando error de formato inválido o credenciales incorrectas sin ejecutar código malicioso,Seguridad,Alta
+CP-021,Autenticación,Intento de inyección SQL en campo contraseña,"Usuario registrado con correo: usuario@test.com, cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar en contraseña: ' OR '1'='1
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: ' OR '1'='1",El sistema rechaza la entrada mostrando credenciales incorrectas sin ejecutar código malicioso,Seguridad,Alta
+CP-022,Autenticación,Validación de contraseña case-sensitive,"Usuario registrado con correo: usuario@test.com, contraseña: Test1234 (con T mayúscula), cuenta activa","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña: test1234 (todo minúsculas)
+4. Hacer clic en el botón 'Iniciar sesión'","Correo: usuario@test.com
+Contraseña: test1234",El sistema muestra mensaje de credenciales incorrectas ya que la contraseña distingue mayúsculas y minúsculas,Funcional,Media
+CP-023,Autenticación,Reseteo de contador de intentos tras inicio exitoso,"Usuario con correo: usuario@test.com, contraseña: Test1234, cuenta activa con 2 intentos fallidos previos","1. Acceder a la página de inicio de sesión
+2. Ingresar correo: usuario@test.com
+3. Ingresar contraseña correcta: Test1234
+4. Hacer clic en el botón 'Iniciar sesión'
+5. Cerrar sesión
+6. Ingresar credenciales incorrectas 3 veces consecutivas","Correo: usuario@test.com
+Contraseña correcta: Test1234
+Contraseña incorrecta: Wrong123","Tras el inicio exitoso, el contador se reinicia. Los 3 nuevos intentos fallidos bloquean la cuenta por 15 minutos",Funcional,Media
