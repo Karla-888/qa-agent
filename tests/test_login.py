@@ -6,7 +6,7 @@ def test_cp_001_inicio_sesion_exitoso(page):
     """CP-001: Inicio de sesión exitoso con credenciales válidas"""
     page.goto("https://www.saucedemo.com")
     page.fill("#user-name", "standard_user")
-    page.fill("#password", "password_malo")
+    page.fill("#password", "secret_sauce")
     page.click("#login-button")
     expect(page.locator(".title")).to_have_text("Products")
 
