@@ -1,0 +1,18 @@
+{
+  "nombre": "The Internet (Heroku)",
+  "url": "https://the-internet.herokuapp.com/login",
+  "selectores": {
+    "usuario": "#username",
+    "contrasena": "#password",
+    "boton_login": "button[type=\"submit\"]",
+    "mensaje_error": "#flash",
+    "elemento_post_login": "h2",
+    "texto_post_login": "Secure Area"
+  },
+  "credenciales": {
+    "validas": {"usuario": "tomsmith", "contrasena": "SuperSecretPassword!"},
+    "bloqueado": null
+  },
+  "notas": "Sitio de practica. No tiene usuarios bloqueados ni validacion de formato de correo."
+}
+

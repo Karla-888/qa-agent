@@ -105,3 +105,24 @@ Los prompts estan separados del codigo a proposito. Cuando el agente se equivoca
 - [ ] Reintento automatico de fallos clasificados como FLAKY
 - [ ] Inferir los metadatos del DA-F05 desde el requerimiento
 - [ ] Reporte Allure
+
+## Evidencia: diagnostico de un fallo real
+
+Durante una corrida contra un segundo sitio, 4 tests fallaron. El agente los clasifico todos como ENTORNO, ninguno como defecto:
+
+> **ENTORNO | CP-ALT-01** - Fallo en el mismo punto (page.goto) que el resto de los tests de la suite, lo que confirma un problema de disponibilidad del sitio o de red en el momento de la corrida, no relacionado con la logica del test ni de la app.
+
+El criterio que uso fue el patron entre fallos: un solo test fallando en la navegacion inicial es sospechoso del test, los cuatro fallando en el mismo punto es firma de entorno. Ese cruce no esta en el prompt.
+
+Verificado despues a mano: el sitio respondia con normalidad. El fallo era de disponibilidad, no de software.
+
+Sin esa clasificacion, los cuatro habrian entrado como defectos a investigar y cerrar como no reproducibles.
+
+## Soporte multi-sitio
+
+Los selectores y credenciales viven en sitios/*.json, fuera del prompt. Apuntar el pipeline a otra aplicacion es escribir un archivo de configuracion, no reescribir prompts.
+
+Probado contra dos sitios distintos: SauceDemo y The Internet (Heroku).
+
+    python src/generar_specs.py login_casos.csv saucedemo
+    python src/generar_specs.py login_internet_casos.csv the-internet

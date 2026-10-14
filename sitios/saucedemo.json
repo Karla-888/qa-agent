@@ -1,0 +1,18 @@
+{
+  "nombre": "SauceDemo",
+  "url": "https://www.saucedemo.com",
+  "selectores": {
+    "usuario": "#user-name",
+    "contrasena": "#password",
+    "boton_login": "#login-button",
+    "mensaje_error": "h3[data-test=\"error\"]",
+    "elemento_post_login": ".title",
+    "texto_post_login": "Products"
+  },
+  "credenciales": {
+    "validas": {"usuario": "standard_user", "contrasena": "secret_sauce"},
+    "bloqueado": {"usuario": "locked_out_user", "contrasena": "secret_sauce"}
+  },
+  "notas": "Sitio de practica. No valida formato de correo, solo compara usuario y contrasena contra una lista fija."
+}
+
