@@ -43,7 +43,7 @@ Partiendo de un requerimiento de login de 6 lineas:
 | Casos marcados como no automatizables | 10 |
 | Tiempo de ejecucion de la suite | 20 s |
 | Tiempo total del pipeline completo | ~3 min |
-| Equivalente manual estimado | PENDIENTE |
+| Equivalente manual estimado | ~60 min |
 
 El prompt prohibe inventar casos para rellenar flujos que no aplican al alcance. Menos casos, mejor clasificados.
 
@@ -126,3 +126,5 @@ Probado contra dos sitios distintos: SauceDemo y The Internet (Heroku).
 
     python src/generar_specs.py login_casos.csv saucedemo
     python src/generar_specs.py login_internet_casos.csv the-internet
+
+Una hora de diseno manual contra tres minutos de pipeline, para el mismo requerimiento. El ahorro no es el punto final: los casos generados igual se revisan, y esa revision es mas rapida que escribirlos desde cero.
