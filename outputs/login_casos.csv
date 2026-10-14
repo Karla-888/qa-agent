@@ -1,0 +1,83 @@
+﻿flujo,no_cp,id_unico,descripcion,precondiciones,pasos,datos_prueba,resultados_esperados,tipo,prioridad,automatizable,comentarios
+Basico,CP01,BAS-01,Inicio de sesión exitoso con correo y contraseña válidos,"1. Existe un usuario activo registrado con correo usuario@dominio.com y contraseña Clave123.
+2. El usuario no tiene bloqueo activo.
+3. El navegador tiene acceso a la URL de login.","1. Navegar a la pantalla de inicio de sesión.
+2. Ingresar el correo usuario@dominio.com en el campo Correo.
+3. Ingresar Clave123 en el campo Contraseña.
+4. Hacer clic en el botón Ingresar.",correo: usuario@dominio.com | contraseña: Clave123,"1. El sistema valida las credenciales sin mostrar error.
+2. El sistema redirige al menú principal.
+3. El nombre del usuario se muestra en la cabecera del menú principal.",Funcional,Alta,Si,
+Alterno,CP01,ALT-01,Intento de inicio de sesión con formato de correo inválido,1. El usuario se encuentra en la pantalla de inicio de sesión.,"1. Ingresar usuarioarroba.dominio.com en el campo Correo.
+2. Ingresar Clave123 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: usuarioarroba.dominio.com | contraseña: Clave123,"1. El sistema muestra el mensaje 'Formato de correo inválido'.
+2. El sistema no redirige al menú principal.
+3. El campo Correo queda resaltado como erróneo.",Negativo,Alta,Si,
+Alterno,CP02,ALT-02,Intento de inicio de sesión con contraseña de menos de 8 caracteres,"1. El usuario se encuentra en la pantalla de inicio de sesión.
+2. Existe un usuario activo con correo usuario@dominio.com.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar Cla12 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: usuario@dominio.com | contraseña: Cla12,"1. El sistema muestra el mensaje 'La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número'.
+2. El sistema no redirige al menú principal.",Negativo,Alta,Si,
+Alterno,CP03,ALT-03,Intento de inicio de sesión con contraseña sin mayúscula,"1. El usuario se encuentra en la pantalla de inicio de sesión.
+2. Existe un usuario activo con correo usuario@dominio.com.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar clave123 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: usuario@dominio.com | contraseña: clave123,"1. El sistema muestra el mensaje 'La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número'.
+2. El sistema no redirige al menú principal.",Negativo,Media,Si,
+Alterno,CP04,ALT-04,Intento de inicio de sesión con contraseña sin número,"1. El usuario se encuentra en la pantalla de inicio de sesión.
+2. Existe un usuario activo con correo usuario@dominio.com.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar Claveabc en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: usuario@dominio.com | contraseña: Claveabc,"1. El sistema muestra el mensaje 'La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número'.
+2. El sistema no redirige al menú principal.",Negativo,Media,Si,
+Alterno,CP05,ALT-05,Bloqueo de cuenta tras 3 intentos fallidos consecutivos,"1. Existe un usuario activo con correo usuario@dominio.com y contraseña correcta Clave123.
+2. El usuario no tiene bloqueo previo activo.","1. Ingresar usuario@dominio.com en el campo Correo e ClaveMala1 en Contraseña, hacer clic en Ingresar.
+2. Repetir el paso 1 con ClaveMala2.
+3. Repetir el paso 1 con ClaveMala3.
+4. Intentar ingresar nuevamente con la contraseña correcta Clave123.","correo: usuario@dominio.com | contraseñas incorrectas: ClaveMala1, ClaveMala2, ClaveMala3 | contraseña correcta: Clave123","1. Los 3 primeros intentos muestran el mensaje 'Credenciales incorrectas'.
+2. Tras el tercer intento fallido, el sistema muestra 'Cuenta bloqueada, intente en 15 minutos'.
+3. El cuarto intento con la contraseña correcta es rechazado y muestra el mensaje de bloqueo.",Seguridad,Alta,No,"Requiere control de tiempo real de bloqueo, validar manualmente o con mock de reloj"
+Alterno,CP06,ALT-06,Usuario inactivo intenta iniciar sesión,"1. Existe un usuario con estado inactivo en base de datos, correo inactivo@dominio.com y contraseña Clave123.","1. Ingresar inactivo@dominio.com en el campo Correo.
+2. Ingresar Clave123 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: inactivo@dominio.com | contraseña: Clave123,"1. El sistema muestra el mensaje 'Usuario deshabilitado'.
+2. El sistema no redirige al menú principal.",Negativo,Alta,No,Requiere estado previo de usuario inactivo en base de datos
+Alterno,CP07,ALT-07,Intento de inicio de sesión durante periodo de bloqueo activo,"1. Existe un usuario con cuenta bloqueada por 15 minutos tras 3 intentos fallidos previos, correo usuario@dominio.com.
+2. El tiempo de bloqueo aún no ha expirado.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar la contraseña correcta Clave123 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: usuario@dominio.com | contraseña: Clave123,"1. El sistema muestra el mensaje 'Cuenta bloqueada, intente en 15 minutos'.
+2. El sistema no redirige al menú principal aunque la contraseña sea correcta.",Seguridad,Alta,No,Requiere estado previo de bloqueo en base de datos
+Alterno,CP08,ALT-08,Intento de inicio de sesión con contraseña incorrecta en primer intento,"1. Existe un usuario activo con correo usuario@dominio.com y contraseña correcta Clave123.
+2. El usuario no tiene intentos fallidos previos.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar ClaveMala1 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.",correo: usuario@dominio.com | contraseña: ClaveMala1,"1. El sistema muestra el mensaje 'Credenciales incorrectas'.
+2. El sistema no redirige al menú principal.
+3. El contador de intentos fallidos se incrementa en 1.",Negativo,Media,Si,
+Integridad,CP01,INT-01,El contador de intentos fallidos se reinicia tras un inicio de sesión exitoso,"1. Existe un usuario activo con correo usuario@dominio.com y contraseña correcta Clave123.
+2. El usuario registra 2 intentos fallidos previos en base de datos.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar la contraseña correcta Clave123 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.
+4. Consultar en base de datos el valor del contador de intentos fallidos del usuario.",correo: usuario@dominio.com | contraseña: Clave123,"1. El sistema redirige al menú principal.
+2. El contador de intentos fallidos en base de datos se restablece a 0.",Funcional,Alta,No,Requiere estado previo de intentos fallidos en base de datos y consulta directa a BD
+Integridad,CP02,INT-02,El usuario puede autenticarse nuevamente tras expirar el bloqueo de 15 minutos,"1. Existe un usuario con cuenta bloqueada cuyo tiempo de bloqueo expiró hace 1 minuto, correo usuario@dominio.com.
+2. La contraseña correcta del usuario es Clave123.","1. Ingresar usuario@dominio.com en el campo Correo.
+2. Ingresar Clave123 en el campo Contraseña.
+3. Hacer clic en el botón Ingresar.
+4. Consultar en base de datos el estado de bloqueo y el contador de intentos del usuario.",correo: usuario@dominio.com | contraseña: Clave123,"1. El sistema permite el acceso y redirige al menú principal.
+2. El estado de bloqueo en base de datos se marca como inactivo.
+3. El contador de intentos fallidos se restablece a 0.",Funcional,Alta,No,"Requiere manipulación de tiempos de bloqueo en base de datos, no automatizable por tiempos de espera largos"
+Integridad,CP03,INT-03,Consistencia del estado inactivo del usuario entre el módulo de administración y el módulo de login,1. Un usuario activo con correo usuario2@dominio.com es marcado como inactivo desde el módulo de administración.,"1. Marcar al usuario usuario2@dominio.com como inactivo desde el módulo de administración.
+2. Consultar en base de datos el estado del usuario.
+3. Intentar iniciar sesión con usuario2@dominio.com y su contraseña Clave123.",correo: usuario2@dominio.com | contraseña: Clave123,"1. El estado del usuario en base de datos aparece como 'inactivo'.
+2. El intento de login es rechazado mostrando 'Usuario deshabilitado'.",Funcional,Media,No,Requiere acceso al módulo de administración y estado previo en base de datos
+Otras,CP01,OTR-01,Tiempo de respuesta del proceso de inicio de sesión bajo carga normal,"1. Existe un usuario activo con correo usuario@dominio.com y contraseña Clave123.
+2. El ambiente de pruebas de rendimiento está configurado con 50 usuarios concurrentes.","1. Simular 50 solicitudes concurrentes de inicio de sesión con credenciales válidas.
+2. Medir el tiempo de respuesta de cada solicitud.",correo: usuario@dominio.com | contraseña: Clave123 | concurrencia: 50 usuarios,"1. El 95% de las solicitudes responden en menos de 2 segundos.
+2. Ninguna solicitud retorna error de servidor.",Funcional,Media,No,"Prueba de desempeño, requiere herramienta de carga y ambiente dedicado"
+Otras,CP02,OTR-02,Compatibilidad del formulario de inicio de sesión en distintos navegadores,"1. Existe un usuario activo con correo usuario@dominio.com y contraseña Clave123.
+2. Se dispone de los navegadores Chrome, Firefox, Edge y Safari actualizados.","1. Abrir la pantalla de login en Chrome e iniciar sesión con las credenciales válidas.
+2. Repetir el paso 1 en Firefox.
+3. Repetir el paso 1 en Edge.
+4. Repetir el paso 1 en Safari.",correo: usuario@dominio.com | contraseña: Clave123,"1. El formulario se muestra correctamente en los 4 navegadores.
+2. El inicio de sesión es exitoso y redirige al menú principal en los 4 navegadores.",Funcional,Baja,No,Requiere validación manual en múltiples navegadores o suite de pruebas cross-browser
+Otras,CP03,OTR-03,Responsividad del formulario de inicio de sesión en dispositivo móvil,"1. Existe un usuario activo con correo usuario@dominio.com y contraseña Clave123.
+2. [SUPUESTO] El sistema debe soportar resolución de pantalla de 375x667 px (dispositivo móvil estándar).","1. Acceder a la pantalla de login desde un dispositivo con resolución 375x667 px.
+2. Verificar que los campos Correo y Contraseña sean visibles y utilizables.
+3. Ingresar usuario@dominio.com y Clave123, hacer clic en Ingresar.",correo: usuario@dominio.com | contraseña: Clave123 | resolución: 375x667,"1. Los campos del formulario se ajustan correctamente a la resolución sin solapamientos.
+2. El inicio de sesión es exitoso y redirige al menú principal.",Funcional,Alta,No,"Requerimiento no especifica soporte móvil explícitamente, se marca como supuesto"
