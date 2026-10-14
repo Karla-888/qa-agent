@@ -15,7 +15,8 @@ def generar(archivo_req: str):
         system=prompt,
         messages=[{"role": "user", "content": f"Requerimiento:\n\n{req}"}],
     )
-    texto = r.content[0].text.strip().removeprefix("```json").removesuffix("```").strip()
+    texto = "".join(b.text for b in r.content if b.type == "text")
+    texto = texto.strip().removeprefix("```json").removesuffix("```").strip()
     casos = json.loads(texto)
 
     salida = RAIZ / "outputs" / f"{pathlib.Path(archivo_req).stem}_casos.csv"
